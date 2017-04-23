@@ -36,6 +36,7 @@ def getAllData():
     return data
 
 def getMFCCFeatures(datapoint):
+    # TODO I'm not sure if I should be messing with the winlen and winstep params for this, see https://github.com/jameslyons/python_speech_features#mfcc-features
     return mfcc(
         signal=datapoint["signal"],
         samplerate=datapoint["samplerate"]
