@@ -21,6 +21,7 @@ def getAllData():
 
             datapoint = {
                 "instrument":  instrument,
+                "path":        fpath,
                 "nframes":     audio.getnframes(),
                 "samplewidth": audio.getsampwidth(),
                 "samplerate":  audio.getframerate()
@@ -42,3 +43,6 @@ def getMFCCFeatures(datapoint):
 
 def getPathsByInstrument(instrument):
     return glob.glob('data/' + instrument + '/*.aif')
+
+if __name__ == "__main__":
+    d = getAllData()
