@@ -10,7 +10,7 @@ def perceptron(features, labels):
         random_state=0
     )
     p.fit(features["train"], labels["train"])
-    print p.score(features["test"], labels["test"])
+    print(p.score(features["test"], labels["test"]))
     return p
 
 if __name__ == "__main__":
