@@ -1,19 +1,51 @@
 """
 Get a list of the data files for each instrument.
 
-Each datapoint will be a dictionary that has keys for at least "instrument" and some kind of derived features.
+Each datapoint will be a dictionary that has keys for at least "instrument" and some basic info like samplerate and a signal derived from its frames:
+{
+    instrument:  string,
+    signal:      [int],
+    samplerate:  int,
+    samplewidth: int,
+    nframes:     int,
+    sigstr:      string,
+    path:        string
+}
 
-Logic for converting aif frames to signal array from https://www.kaggle.com/c/whale-detection-challenge/discussion/3794
+getSplitData returns a dict that looks like this:
+{
+    train: [datapoints],
+    test:  [datapoints]
+}
+
+getAllData returns a list of datapoint dicts following the shape above.
 """
 import aifc
 import struct
 import glob
+import random
 import numpy as np
-from python_speech_features import mfcc
 
 INSTRUMENTS = ["flute", "trumpet"]
+# These should add up to 1.0
+TRAIN_PERCENT = 0.80
+TEST_PERCENT = 0.20
+
+def getSplitData():
+    # Split up all of the data into train and test portions
+    d = getAllData()
+    random.seed(0)
+    random.shuffle(d)
+
+    train_cutoff = int(len(d) * TRAIN_PERCENT)
+    splitData = {
+        "train": d[:train_cutoff],
+        "test": d[train_cutoff:]
+    }
+    return splitData
 
 def getAllData():
+    # Return all datapoints as dicts in a single list
     data = []
     for instrument in INSTRUMENTS:
         for fpath in getPathsByInstrument(instrument):
@@ -28,22 +60,19 @@ def getAllData():
             }
 
             datapoint["sigstr"] = audio.readframes(datapoint["nframes"])
-            datapoint["signal"] = np.fromstring(datapoint["sigstr"], np.short).byteswap()
-            datapoint["mfcc_features"] = getMFCCFeatures(datapoint)
+            datapoint["signal"] = getSignalArray(datapoint)
 
             data.append(datapoint)
             audio.close()
     return data
 
-def getMFCCFeatures(datapoint):
-    # TODO I'm not sure if I should be messing with the winlen and winstep params for this, see https://github.com/jameslyons/python_speech_features#mfcc-features
-    return mfcc(
-        signal=datapoint["signal"],
-        samplerate=datapoint["samplerate"]
-    )
-
 def getPathsByInstrument(instrument):
     return glob.glob('data/' + instrument + '/*.aif')
 
+def getSignalArray(datapoint):
+    # from https://www.kaggle.com/c/whale-detection-challenge/discussion/3794
+    return np.fromstring(datapoint["sigstr"], np.short).byteswap()
+
 if __name__ == "__main__":
-    d = getAllData()
+    allData = getAllData()
+    splitData = getSplitData()
