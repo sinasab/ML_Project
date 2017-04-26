@@ -25,15 +25,17 @@ import struct
 import glob
 import random
 import numpy as np
+from sklearn.preprocessing import StandardScaler
 
-INSTRUMENTS = ["flute", "trumpet", "BbClarinet", "oboe", "saxaphone", "Basoon", "BassClarinet", "Tuba", "Horn"]
+INSTRUMENTS = ["AltoFlute", "Basoon", "BassClarinet", "BassFlute", "BassG", "BassTrombone", "BbClarinet", "CelloG", "EbClarinet", "flute", "Horn", "oboe", "saxaphone", "SopSax", "TenorTrombome", "trumpet", "Tuba", "ViolaG", "ViolinG"]
 # These should add up to 1.0
 TRAIN_PERCENT = 0.80
 TEST_PERCENT = 0.20
 
-def getSplitData():
+def getSplitData(num=None):
     # Split up all of the data into train and test portions
-    d = getAllData()
+    d = getAllData(num)
+
     random.seed(0)
     random.shuffle(d)
 
@@ -44,10 +46,14 @@ def getSplitData():
     }
     return splitData
 
-def getAllData():
+def getAllData(num=None):
     # Return all datapoints as dicts in a single list
     data = []
-    for instrument in INSTRUMENTS:
+    instruments = INSTRUMENTS
+    random.shuffle(instruments)
+    if num:
+        instruments = instruments[:num]
+    for instrument in instruments:
         for fpath in getPathsByInstrument(instrument):
             audio = aifc.open(fpath)
 
