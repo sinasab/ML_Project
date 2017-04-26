@@ -15,9 +15,16 @@ def perceptron(features, labels):
     print p.score(features["test"], labels["test"])
     return p
 
+def knn(features, labels):
+    from sklearn.neighbors import KNeighborsClassifier
+    p = KNeighborsClassifier(3)
+    p.fit(features["train"], labels["train"])
+    print p.score(features["test"], labels["test"])
+    return p
+
 def neuralNet(features, labels):
     from sklearn.neural_network import MLPClassifier
-    p = MLPClassifier(max_iter=1000, solver='lbfgs', hidden_layer_sizes=(100,100))
+    p = MLPClassifier(max_iter=1000, solver='lbfgs', hidden_layer_sizes=(100))
     p.fit(features["train"], labels["train"])
     print p.score(features["test"], labels["test"])
     return p
@@ -59,7 +66,9 @@ if __name__ == "__main__":
         elif classifier ==3:
             p = bayes(features, labels)
         elif classifier == 4:
-            p = neuralNet(features, labels)          
+            p = neuralNet(features, labels)
+        elif classifier == 5:
+            p = knn(features, labels)        
         else:
             p = perceptron(features, labels)
     else:
