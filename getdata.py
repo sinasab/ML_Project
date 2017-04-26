@@ -26,7 +26,7 @@ import glob
 import random
 import numpy as np
 
-INSTRUMENTS = ["flute", "trumpet", "BbClarinet", "oboe"]
+INSTRUMENTS = ["flute", "trumpet", "BbClarinet", "oboe", "saxaphone", "Basoon", "BassClarinet", "Tuba", "Horn"]
 # These should add up to 1.0
 TRAIN_PERCENT = 0.80
 TEST_PERCENT = 0.20

@@ -7,10 +7,24 @@ def perceptron(features, labels):
     p = OneVsOneClassifier(Perceptron(
         n_iter=200,
         # verbose=True,
-        # n_jobs=-1, # parallelize
+        n_jobs=-1, # parallelize
         shuffle=True,
         random_state=0
     ))
+    p.fit(features["train"], labels["train"])
+    print p.score(features["test"], labels["test"])
+    return p
+
+def neuralNet(features, labels):
+    from sklearn.neural_network import MLPClassifier
+    p = MLPClassifier(max_iter=1000, solver='lbfgs', hidden_layer_sizes=(100,100))
+    p.fit(features["train"], labels["train"])
+    print p.score(features["test"], labels["test"])
+    return p
+
+def bayes(features, labels):
+    from sklearn.naive_bayes import GaussianNB
+    p = OneVsOneClassifier(GaussianNB())
     p.fit(features["train"], labels["train"])
     print p.score(features["test"], labels["test"])
     return p
@@ -41,7 +55,11 @@ if __name__ == "__main__":
         if classifier == 1:
             p = svm(features, labels)
         elif classifier == 2:
-            p = randomforest(features, labels)          
+            p = randomforest(features, labels)
+        elif classifier ==3:
+            p = bayes(features, labels)
+        elif classifier == 4:
+            p = neuralNet(features, labels)          
         else:
             p = perceptron(features, labels)
     else:
