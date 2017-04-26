@@ -47,7 +47,7 @@ def randomforest(features, labels):
     from sklearn.ensemble import RandomForestClassifier
     p = RandomForestClassifier(n_estimators=20)
     p.fit(features["train"], labels["train"])
-    print p.score(features["test"], labels["test"])
+    print(p.score(features["test"], labels["test"]))
     return p
 
 if __name__ == "__main__":
