@@ -52,7 +52,7 @@ def randomforest(features, labels):
 
 if __name__ == "__main__":
     from getdata import getSplitData
-    from getlabels import instrumentsToLabels
+    from getlabels import instrumentsToLabels, categoryToLabels
     from featurize import mfcc_averages
     splitData = getSplitData()
     labels = instrumentsToLabels(splitData)

@@ -28,6 +28,11 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 INSTRUMENTS = ["AltoFlute", "Basoon", "BassClarinet", "BassFlute", "BassG", "BassTrombone", "BbClarinet", "CelloG", "EbClarinet", "flute", "Horn", "oboe", "saxaphone", "SopSax", "TenorTrombone", "trumpet", "Tuba", "ViolaG", "ViolinG"]
+INSTRUMENT_CATEGORIES = {
+    "woodwind": ["BbClarinet", "BassClarinet", "BassFlute", "AltoFlute", "flute", "Basoon", "EbClarinet", "oboe", "saxaphone", "SopSax"],
+    "brass": ["trumpet", "BassTrombone", "Horn", "TenorTrombome", "Tuba"],
+    "strings": ["CelloG", "ViolaG", "ViolinG", "BassG"]
+}
 # These should add up to 1.0
 TRAIN_PERCENT = 0.80
 TEST_PERCENT = 0.20
@@ -68,6 +73,7 @@ def getAllData(num=None):
 
             datapoint["sigstr"] = audio.readframes(datapoint["nframes"])
             datapoint["signal"] = getSignalArray(datapoint)
+            datapoint["instrument_category"] = instrumentToCategory(instrument)
 
             data.append(datapoint)
             audio.close()
@@ -75,6 +81,13 @@ def getAllData(num=None):
 
 def getPathsByInstrument(instrument):
     return glob.glob('data/' + instrument + '/*.aif')
+
+def instrumentToCategory(instrument):
+    for k in INSTRUMENT_CATEGORIES:
+        if instrument in INSTRUMENT_CATEGORIES[k]:
+            return k
+    print "Unexpected instrument category encountered!"
+    return "unknown category"
 
 def getSignalArray(datapoint):
     # from https://www.kaggle.com/c/whale-detection-challenge/discussion/3794

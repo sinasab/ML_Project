@@ -25,16 +25,31 @@ def instrumentsToLabels(splitData):
     train_instruments = [dp["instrument"] for dp in splitData["train"]]
     labels["train"] = le.fit_transform(train_instruments)
 
-    removeUnseenInstruments(splitData, le)
+    removeUnseenClasses(splitData, le, "instrument")
 
     test_instruments = [dp["instrument"] for dp in splitData["test"]]
     labels["test"] = le.transform(test_instruments)
 
     return labels
 
-def removeUnseenInstruments(splitData, le):
+def categoryToLabels(splitData):
+    # same as above but working with instrument_category instead of instrument
+    le = LabelEncoder()
+    labels = { "le": le }
+
+    train_categories = [dp["instrument_category"] for dp in splitData["train"]]
+    labels["train"] = le.fit_transform(train_categories)
+
+    removeUnseenClasses(splitData, le, "instrument_category")
+
+    test_categories = [dp["instrument_category"] for dp in splitData["test"]]
+    labels["test"] = le.transform(test_categories)
+
+    return labels
+
+def removeUnseenClasses(splitData, le, key):
     # remove labels that aren't in the training data from the test data
     splitData["test"] = [
         dp for dp in splitData["test"]
-        if dp["instrument"] in le.classes_
+        if dp[key] in le.classes_
     ]
