@@ -27,7 +27,7 @@ import random
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-INSTRUMENTS = ["AltoFlute", "Basoon", "BassClarinet", "BassFlute", "BassG", "BassTrombone", "BbClarinet", "CelloG", "EbClarinet", "flute", "Horn", "oboe", "saxaphone", "SopSax", "TenorTrombome", "trumpet", "Tuba", "ViolaG", "ViolinG"]
+INSTRUMENTS = ["AltoFlute", "Basoon", "BassClarinet", "BassFlute", "BassG", "BassTrombone", "BbClarinet", "CelloG", "EbClarinet", "flute", "Horn", "oboe", "saxaphone", "SopSax", "TenorTrombone", "trumpet", "Tuba", "ViolaG", "ViolinG"]
 # These should add up to 1.0
 TRAIN_PERCENT = 0.80
 TEST_PERCENT = 0.20
@@ -53,6 +53,7 @@ def getAllData(num=None):
     random.shuffle(instruments)
     if num:
         instruments = instruments[:num]
+    print instruments
     for instrument in instruments:
         for fpath in getPathsByInstrument(instrument):
             audio = aifc.open(fpath)
