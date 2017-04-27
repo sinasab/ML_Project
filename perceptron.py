@@ -4,13 +4,13 @@ import sys
 
 def perceptron(features, labels):
     from sklearn.linear_model import Perceptron
-    p = OneVsOneClassifier(Perceptron(
+    p = Perceptron(
         n_iter=200,
         # verbose=True,
         n_jobs=-1, # parallelize
         shuffle=True,
         random_state=0
-    ))
+    )
     p.fit(features["train"], labels["train"])
     print p.score(features["test"], labels["test"])
     return p
