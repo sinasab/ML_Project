@@ -27,9 +27,9 @@ import random
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-INSTRUMENTS = ["AltoFlute", "Basoon", "BassClarinet", "BassFlute", "BassG", "BassTrombone", "BbClarinet", "CelloG", "EbClarinet", "flute", "Horn", "oboe", "saxaphone", "SopSax", "TenorTrombone", "trumpet", "Tuba", "ViolaG", "ViolinG"]
+INSTRUMENTS = ["AltoFlute", "Basoon", "BassClarinet", "BassFlute", "BassG", "BassTrombone", "BbClarinet", "CelloG", "EbClarinet", "flute", "Horn", "oboe", "saxophone", "SopSax", "TenorTrombone", "trumpet", "Tuba", "ViolaG", "ViolinG"]
 INSTRUMENT_CATEGORIES = {
-    "woodwind": ["BbClarinet", "BassClarinet", "BassFlute", "AltoFlute", "flute", "Basoon", "EbClarinet", "oboe", "saxaphone", "SopSax"],
+    "woodwind": ["BbClarinet", "BassClarinet", "BassFlute", "AltoFlute", "flute", "Basoon", "EbClarinet", "oboe", "saxophone", "SopSax"],
     "brass": ["trumpet", "BassTrombone", "Horn", "TenorTrombome", "Tuba"],
     "strings": ["CelloG", "ViolaG", "ViolinG", "BassG"]
 }
