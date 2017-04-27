@@ -27,10 +27,10 @@ import random
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
-INSTRUMENTS = ["AltoFlute", "Basoon", "BassClarinet", "BassFlute", "BassG", "BassTrombone", "BbClarinet", "CelloG", "EbClarinet", "flute", "Horn", "oboe", "saxaphone", "SopSax", "TenorTrombone", "trumpet", "Tuba", "ViolaG", "ViolinG"]
+INSTRUMENTS = ["AltoFlute", "Basoon", "BassClarinet", "BassFlute", "BassG", "BassTrombone", "BbClarinet", "CelloG", "EbClarinet", "flute", "Horn", "oboe", "saxophone", "SopSax", "TenorTrombone", "trumpet", "Tuba", "ViolaG", "ViolinG"]
 INSTRUMENT_CATEGORIES = {
-    "woodwind": ["BbClarinet", "BassClarinet", "BassFlute", "AltoFlute", "flute", "Basoon", "EbClarinet", "oboe", "saxaphone", "SopSax"],
-    "brass": ["trumpet", "BassTrombone", "Horn", "TenorTrombome", "Tuba"],
+    "woodwind": ["BbClarinet", "BassClarinet", "BassFlute", "AltoFlute", "flute", "Basoon", "EbClarinet", "oboe", "saxophone", "SopSax"],
+    "brass": ["trumpet", "BassTrombone", "Horn", "TenorTrombone", "Tuba"],
     "strings": ["CelloG", "ViolaG", "ViolinG", "BassG"]
 }
 # These should add up to 1.0
@@ -86,6 +86,7 @@ def instrumentToCategory(instrument):
     for k in INSTRUMENT_CATEGORIES:
         if instrument in INSTRUMENT_CATEGORIES[k]:
             return k
+    print instrument
     print "Unexpected instrument category encountered!"
     return "unknown category"
 
