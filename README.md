@@ -15,6 +15,15 @@ In order to convert the data to a form that one of our algorithms can understand
 In a nutshell, this library takes an N*1 array representing an audio signal and a sample rate. It returns
 an array of feature vectors calculated from the audio signal. The library is creating MFCC (Mel-frequency cepstral coefficients) vectors, which is a fancy way of saying it's creating the representation of the short-term power spectrum of a sound. This project will learn those features
 to classify which instruments produces the sounds.
+However, each audio file creates an array of feature vectors as a coefficient vector is created for every sample of the signal.
+Because each file is of different length, each file produces a different sized coefficient matrix. Our solution to this
+is to average the coefficients produced for each audio file. That way each audio file is one datapoint
+
+## Algorithms
+
+In the file `algorithms.py`, you'll find each of the algorithms used to learn our audio data. The file `long_run.py`
+shows the script run to get the data used for the results found in the paper.
+
 
 ## Team
 
