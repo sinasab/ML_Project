@@ -80,5 +80,5 @@ To collect the data and see the algorithms produce results:
 
 - [Rafah Asadi](https://github.com/cse3019)
 - [Cameron Long](https://github.com/phirefly9)
-- [Sina Sabet](https://github.com/sinasabet18)
+- [Sina Sabet](https://github.com/sinasabet81)
 - [Alex Tareshawty](https://github.com/atareshawty)
