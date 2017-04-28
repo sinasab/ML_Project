@@ -2,7 +2,7 @@ from getdata import getSplitData
 from getlabels import instrumentsToLabels
 from featurize import mfcc_averages
 from sklearn.multiclass import OneVsOneClassifier
-from perceptron import *
+from algorithms import *
 import numpy as np
 import sys
 #generate data
