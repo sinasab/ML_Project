@@ -41,7 +41,7 @@ To collect the data and see the algorithms produce results:
       |   +-- trumpet/
       |   |   +-- Trumpet.vib.ff.A3.aif
       |   +-- brass/
-      |   |   +-- Trumper.vib.ff.A3.aif
+      |   |   +-- Trumpet.vib.ff.A3.aif
       |   |   +-- ... (other brass instrument files)
       |   +-- strings/
       |   +-- woodwinds/
