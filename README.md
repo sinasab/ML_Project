@@ -2,6 +2,8 @@
 
 # CSE 5523 Final Project
 
+Full writeup available at https://github.com/sinasabet81/ML_Project/blob/master/ML%20Report.pdf
+
 ## Data
 
 This project classifies instruments based on recordings made by the wonderful people at the University of Iowa.
